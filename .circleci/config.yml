@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run: curl -sS https://getcomposer.org/installer | php -- --filename=composer
       - run: ./composer install
-      - run: phpunit
+      - run: /vemder/bin/phpunit
 
 
 # # PHP CircleCI 2.0 configuration file
