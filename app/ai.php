@@ -18,7 +18,24 @@ class AI
      */
     public static function getGender($text)
     {
-        return 'Male';
+        $male = array("ครับ","คับ","ครัช","ฮะ");
+        $female = array("ค่ะ","จ่ะ","คะ","จ๋า","ขา");
+        for($i=0;$i<sizeof($male);$i++){
+            if (strpos($text,$male[$i])!==false)
+            return 'Male';
+        }
+        
+       
+      
+        for($i=0;$i<sizeof($female);$i++){
+            if(strpos($text,$female[$i])!==false){
+            return 'Female';
+            }
+            else{
+            return 'Unknown';
+            }
+        }
+        
     }
 
     /**
@@ -26,7 +43,16 @@ class AI
      */
     public static function getSentiment($text)
     {
-        return 'Neutral';
+        if (strpos($text,"มีความสุข")!==false)
+        return 'Positive';
+
+        else if (strpos($text,"เซ็ง")!==false){
+        return  'Neutral';   
+        }
+        else {
+        return 'Negative';
+        }
+        
     }
 
     /**
@@ -34,7 +60,10 @@ class AI
      */
     public static function getRudeWords($text)
     {
-        return ['แสส'];
+        if (strpos($text,"โง่")!==false)
+        return ['โง่'];
+
+        return ['test'];
     }
 
     /**
@@ -42,6 +71,19 @@ class AI
      */
     public static function getLanguages($text)
     {
-        return ['TH', 'EN'];
+        $result = [];
+        $re = '/[ก-๛]+/u';
+        preg_match_all($re, $text, $matches, PREG_SET_ORDER, 0);
+        if (!empty($matches)) {
+            array_push($result, 'TH');
+        }
+
+        $re = '/[a-z]+/u';
+        preg_match_all($re, $text, $matches, PREG_SET_ORDER, 0);
+        if (!empty($matches)) {
+            array_push($result, 'EN');
+        }
+        return $result;
     }
+
 }
