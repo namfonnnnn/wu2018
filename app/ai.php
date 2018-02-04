@@ -31,11 +31,10 @@ class AI
             if(strpos($text,$female[$i])!==false){
             return 'Female';
             }
-            else{
-            return 'Unknown';
-            }
+            
         }
         
+        return 'Unknown';
     }
 
     /**
@@ -47,10 +46,10 @@ class AI
         return 'Positive';
 
         else if (strpos($text,"เซ็ง")!==false){
-        return  'Neutral';   
+        return  'Negative';   
         }
         else {
-        return 'Negative';
+        return 'Neutral';
         }
         
     }
